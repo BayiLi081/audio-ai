@@ -1,0 +1,15 @@
+*.pdf
+*pptx
+*.wav
+*m4a
+*.mp3
+*.flac
+*.aac
+*.txt
+*.csv
+*.zip
+*.tar.gz
+*.mp4
+*.dat
+*.exe
+*meeting_summaries.md
