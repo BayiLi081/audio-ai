@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Audio AI Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <div class="bg-shape shape-left" aria-hidden="true"></div>
+    <div class="bg-shape shape-right" aria-hidden="true"></div>
+
+    <main class="layout">
+      <header class="hero">
+        <p class="kicker">Audio AI</p>
+        <h1>Meeting Transcription Workspace</h1>
+        <p>
+          Upload audio, run Whisper transcription, and optionally split output by speaker
+          with local diarization models.
+        </p>
+      </header>
+
+      <section class="card input-card">
+        <form id="transcribe-form">
+          <label class="field">
+            <span>Audio file</span>
+            <input id="audio-file" name="file" type="file" accept="audio/*" required />
+          </label>
+
+          <div class="field-grid">
+            <label class="field">
+              <span>Whisper model</span>
+              <select id="model-name" name="model_name">
+                <option value="tiny">tiny</option>
+                <option value="base">base</option>
+                <option value="small.en" selected>small.en</option>
+                <option value="medium">medium</option>
+                <option value="large">large</option>
+              </select>
+            </label>
+
+            <label class="field checkbox-field">
+              <input id="diarize" name="diarize" type="checkbox" value="true" />
+              <span>Enable speaker diarization</span>
+            </label>
+          </div>
+
+          <button id="submit-btn" type="submit">Transcribe</button>
+          <p id="status" class="status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section class="card result-card hidden" id="result-block">
+        <div class="result-head">
+          <h2>Result</h2>
+          <p id="meta"></p>
+        </div>
+
+        <article>
+          <h3>Transcript</h3>
+          <pre id="transcript"></pre>
+        </article>
+
+        <article>
+          <h3>Segments</h3>
+          <div id="segments" class="segments"></div>
+        </article>
+      </section>
+    </main>
+
+    <script src="/static/app.js" defer></script>
+  </body>
+</html>

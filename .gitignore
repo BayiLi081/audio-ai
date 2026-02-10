@@ -12,4 +12,11 @@
 *.mp4
 *.dat
 *.exe
+*.yaml
+*.bin
+*.pyc
 *meeting_summaries.md
+# Web app runtime artifacts
+backend/data/
+__pycache__/
+*test*
