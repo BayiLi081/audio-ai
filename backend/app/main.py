@@ -16,6 +16,7 @@ from .services.audio import (
     save_upload_file,
 )
 from .services.diarization import diarize_and_transcribe
+from .services.persistence import save_transcription_outputs
 from .services.transcription import transcribe_audio
 
 app = FastAPI(
@@ -82,7 +83,7 @@ async def transcribe(
                 model_name=model_name,
             )
 
-            return TranscriptionResponse(
+            response = TranscriptionResponse(
                 job_id=job_id,
                 file_name=file.filename,
                 duration_seconds=duration_seconds,
@@ -92,10 +93,12 @@ async def transcribe(
                 transcript=diarized["transcript"],
                 segments=diarized["segments"],
             )
+            save_transcription_outputs(output_dir=output_dir, result=response)
+            return response
 
         transcription = transcribe_audio(wav_path, model_name)
 
-        return TranscriptionResponse(
+        response = TranscriptionResponse(
             job_id=job_id,
             file_name=file.filename,
             duration_seconds=duration_seconds,
@@ -105,6 +108,8 @@ async def transcribe(
             transcript=transcription["text"],
             segments=[],
         )
+        save_transcription_outputs(output_dir=output_dir, result=response)
+        return response
 
     except HTTPException:
         raise

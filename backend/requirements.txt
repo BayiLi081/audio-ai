@@ -1,0 +1,8 @@
+fastapi>=0.116.0,<1.0.0
+uvicorn[standard]>=0.35.0,<1.0.0
+python-multipart>=0.0.20,<0.1.0
+pydub>=0.25.1,<1.0.0
+openai-whisper
+
+# Optional for speaker diarization support:
+# pip install -r backend/requirements-diarization.txt

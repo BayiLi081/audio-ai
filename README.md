@@ -8,6 +8,7 @@ This project is now a full web app with a FastAPI backend and browser frontend.
 - Convert to 16kHz mono WAV
 - Transcribe with Whisper
 - Optionally run speaker diarization (using local pyannote config/models already in `test/models`)
+- Save generated outputs per job (`transcript.txt`, `segments.csv`, `result.json`)
 
 ## Project structure
 
@@ -53,3 +54,16 @@ Open:
     - `file` (audio file)
     - `model_name` (Whisper model, e.g. `small.en`)
     - `diarize` (`true`/`false`)
+
+## Saved outputs
+
+Each request creates a `job_id` folder in:
+
+- `backend/data/uploads/<job_id>/` for the original upload
+- `backend/data/processed/<job_id>/` for processed artifacts
+
+Generated text artifacts are saved in `backend/data/processed/<job_id>/`:
+
+- `transcript.txt`
+- `segments.csv` (empty except header when diarization is disabled)
+- `result.json`
